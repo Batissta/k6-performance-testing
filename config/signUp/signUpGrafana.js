@@ -1,6 +1,6 @@
-import enduranceConfig from "./enduranceConfig.js";
-import loadConfig from "./loadConfig.js";
-import stressConfig from "./stressConfig.js";
+import enduranceConfig from "./endurance.js";
+import loadConfig from "./load.js";
+import stressConfig from "./config/stressConfig.js";
 
 export default {
   scenarios: {
@@ -11,9 +11,9 @@ export default {
     signUpEndurance: {
       ...enduranceConfig.scenarios.signup_endurance,
       stages: [
-        { duration: "1m", target: 30 }, // Ramp Up
-        { duration: "3m", target: 30 }, // Steady State
-        { duration: "15s", target: 0 }, // Ramp Down
+        { duration: "1m", target: 30 },
+        { duration: "3m", target: 30 },
+        { duration: "15s", target: 0 },
       ],
       exec: "signUpEndurance",
     },
