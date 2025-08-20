@@ -7,25 +7,11 @@ pipeline {
                 script {
                     echo 'Executando testes de performance...'
                     dir('ci/load') {
-                        sh 'k6_custom run --env BASE_URI=http://host.docker.internal:3333 --out xk6-prometheus-rw --out json=results.json ../../tests/smokeTests.js'
+                        sh 'k6_custom run --env BASE_URI=http://host.docker.internal:3333 --out xk6-prometheus-rw ../../tests/smokeTests.js'
                     }
                 }
             }
         }
     }
     
-    post {
-        always {
-            echo 'Publicando relatório de desempenho no Jenkins.'
-            script {
-                // Publica os resultados do K6 no dashboard do Jenkins
-                dir('ci/load') {
-                    performanceReport(
-                        relativePaths: ['results.json'],
-                        configType: 'k6'
-                    )
-                }
-            }
-        }
-    }
 }
