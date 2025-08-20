@@ -6,9 +6,7 @@ pipeline {
             steps {
                 script {
                     echo 'Executando testes de fumaça...'
-                    dir('ci/load') {
                         sh 'k6_custom run tests/smokeTests.js' 
-                    }
                 }
             }
         }
