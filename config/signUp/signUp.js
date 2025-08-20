@@ -27,7 +27,7 @@ export default {
         testId: "signUp_endurance",
         testType: "endurance",
       },
-      exec: "signUpEndurance",
+      exec: "signUp",
     },
 
     signUpStress: {
@@ -45,7 +45,7 @@ export default {
         testId: "signUp_stress",
         testType: "stress",
       },
-      exec: "signUpStress",
+      exec: "signUp",
       startTime: "3m15s",
     },
 
@@ -57,7 +57,7 @@ export default {
         testId: "signUp_smoke",
         testType: "smoke",
       },
-      exec: "signUpStress",
+      exec: "signUp",
       startTime: "3m15s",
     },
   },
@@ -72,7 +72,7 @@ export default {
     "http_req_failed{testId:signUp_endurance}": ["rate<0.01"],
     "http_req_duration{testId:signUp_endurance}": ["p(95)<400"],
 
-    "http_req_failed{testId:signUp_endurance}": ["rate<0.01"],
-    "http_req_duration{testId:signUp_endurance}": ["p(99)<200"],
+    "http_req_failed{testId:signUp_smoke}": ["rate<0.01"],
+    "http_req_duration{testId:signUp_smoke}": ["p(99)<200"],
   },
 };
