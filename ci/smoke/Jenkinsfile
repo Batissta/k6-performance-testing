@@ -2,11 +2,13 @@ pipeline {
     agent any
 
     stages {
-        stage('Run Load Test') {
+        stage('Run Performance Test') {
             steps {
                 script {
-                    echo 'Executando testes de fumaça...'
-                        sh 'k6_custom run --env BASE_URI=http://host.docker.internal:3333 tests/smokeTests.js' 
+                    echo 'Executando testes de performance...'
+                    dir('ci/load') {
+                        sh 'K6_PROMETHEUS_RW_SERVER_URL=http://prometheus:9090/api/v1/write k6_custom run --env BASE_URI=http://host.docker.internal:3333 --out xk6-prometheus-rw ../../tests/smokeTests.js'
+                    }
                 }
             }
         }
