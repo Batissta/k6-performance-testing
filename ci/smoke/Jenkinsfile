@@ -5,9 +5,9 @@ pipeline {
         stage('Run Load Test') {
             steps {
                 script {
-                    echo 'Executando testes de carga...'
+                    echo 'Executando testes de fumaça...'
                     dir('ci/load') {
-                        sh 'k6_custom run load_test.js' 
+                        sh 'k6_custom run tests/smokeTests.js' 
                     }
                 }
             }
