@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     echo 'Executando testes de fumaça...'
-                        sh 'k6_custom run tests/smokeTests.js' 
+                        sh 'k6_custom run --env BASE_URI=http://host.docker.internal:3333 tests/smokeTests.js' 
                 }
             }
         }
