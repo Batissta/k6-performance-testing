@@ -9,4 +9,7 @@ export const options = {
       ...config.scenarios.signUpEndurance,
     },
   },
+  thresholds: {
+    ...config.thresholds.enduranceThresholds,
+  },
 };

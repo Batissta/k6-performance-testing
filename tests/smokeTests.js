@@ -9,4 +9,7 @@ export const options = {
       ...config.scenarios.signUpSmoke,
     },
   },
+  thresholds: {
+    ...config.thresholds.smokeThresholds,
+  },
 };

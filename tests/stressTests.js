@@ -9,4 +9,7 @@ export const options = {
       ...config.scenarios.signUpStress,
     },
   },
+  thresholds: {
+    ...config.thresholds.stressThresholds,
+  },
 };
