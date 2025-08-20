@@ -2,11 +2,41 @@ pipeline {
     agent any
 
     stages {
-        stage('Run Load Test') {
+        stage('Start Monitoring Stack') {
             steps {
                 script {
-                    echo 'Executando testes de fumaça...'
-                        sh 'k6_custom run --env BASE_URI=http://host.docker.internal:3333 tests/smokeTests.js' 
+                    echo 'Iniciando Prometheus e Grafana com Docker Compose...'
+                    sh 'docker compose up -d'
+                }
+            }
+        }
+
+        stage('Run Performance Test') {
+            steps {
+                script {
+                    echo 'Executando testes de performance...'
+                    dir('ci/load') {
+                        sh 'k6_custom run --env BASE_URI=http://host.docker.internal:3333 --out prometheus-remote=http://prometheus:9090/api/v1/write --out json=results.json load_test.js'
+                    }
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            echo 'Parando Prometheus e Grafana...'
+            sh 'docker compose down'
+        }
+        success {
+            echo 'Publicando relatório de desempenho no Jenkins.'
+            script {
+                // Publica os resultados do K6 no dashboard do Jenkins
+                dir('ci/load') {
+                    performanceReport(
+                        relativePaths: ['results.json'],
+                        configType: 'k6'
+                    )
                 }
             }
         }
