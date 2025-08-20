@@ -2,15 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Start Monitoring Stack') {
-            steps {
-                script {
-                    echo 'Iniciando Prometheus e Grafana com Docker Compose...'
-                    sh 'docker compose up -d'
-                }
-            }
-        }
-
         stage('Run Performance Test') {
             steps {
                 script {
