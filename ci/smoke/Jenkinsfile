@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Run Load Test') {
+            steps {
+                script {
+                    echo 'Executando testes de carga...'
+                    dir('ci/load') {
+                        sh 'k6_custom run load_test.js' 
+                    }
+                }
+            }
+        }
+    }
+}
