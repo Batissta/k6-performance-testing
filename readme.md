@@ -1,12 +1,3 @@
-# Ideia de estrutura
+# Binários xK6
 
-- us001. signUp
-  - test
-  - config
-    - loadConfig
-  - request
-- us002.
-- us003.
-- us004.
-- us005.
-- us006.
+`xk6 build --with github.com/grafana/xk6-faker@latest --with github.com/grafana/xk6-output-prometheus-remote@latest`
