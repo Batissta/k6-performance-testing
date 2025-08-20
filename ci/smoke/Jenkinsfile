@@ -16,10 +16,6 @@ pipeline {
     
     post {
         always {
-            echo 'Parando Prometheus e Grafana...'
-            sh 'docker compose down'
-        }
-        success {
             echo 'Publicando relatório de desempenho no Jenkins.'
             script {
                 // Publica os resultados do K6 no dashboard do Jenkins
