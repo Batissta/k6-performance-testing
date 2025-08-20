@@ -46,7 +46,6 @@ export default {
         testType: "stress",
       },
       exec: "signUp",
-      startTime: "3m15s",
     },
 
     signUpSmoke: {
@@ -58,7 +57,6 @@ export default {
         testType: "smoke",
       },
       exec: "signUp",
-      startTime: "3m15s",
     },
   },
   thresholds: {
