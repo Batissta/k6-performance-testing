@@ -5,22 +5,22 @@ export default {
       startVUs: 0,
       stages: [
         { duration: "15s", target: 30 },
-        { duration: "30s", target: 30 },
+        { duration: "3s", target: 100 },
         { duration: "15s", target: 0 },
       ],
       tags: {
         testId: "signUp_load",
         testType: "Load",
       },
-      exec: "signUpLoad",
+      exec: "signUp",
     },
 
     signUpEndurance: {
       executor: "ramping-vus",
       startVUs: 0,
       stages: [
-        { duration: "1m", target: 100 },
-        { duration: "3m", target: 100 },
+        { duration: "1m", target: 80 },
+        { duration: "3m", target: 80 },
         { duration: "15s", target: 0 },
       ],
       tags: {
@@ -71,5 +71,8 @@ export default {
 
     "http_req_failed{testId:signUp_endurance}": ["rate<0.01"],
     "http_req_duration{testId:signUp_endurance}": ["p(95)<400"],
+
+    "http_req_failed{testId:signUp_endurance}": ["rate<0.01"],
+    "http_req_duration{testId:signUp_endurance}": ["p(99)<200"],
   },
 };

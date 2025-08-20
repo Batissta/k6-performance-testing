@@ -1,7 +1,12 @@
 import config from "../config/signUp/signUp.js";
+import { signUp } from "../simulation/signUp.js";
+
+export { signUp };
 
 export const options = {
-  signUp: {
-    ...config.scenarios.signUpLoad,
+  scenarios: {
+    signUpLoad: {
+      ...config.scenarios.signUpLoad,
+    },
   },
 };
