@@ -17,6 +17,47 @@
 
 Este projeto demonstra uma arquitetura de testes de performance completa, utilizando **K6** para execução, **Prometheus** para coleta de métricas e **Grafana** para visualização, tudo orquestrado por uma pipeline **Jenkins** em um ambiente Docker.
 
+
+<h3>✨ Contribuidores</h3>
+<br>
+<table border="0">
+  <tr>
+    <td align="center">
+      <a href="https://github.com/Batissta">
+        <img src="https://avatars.githubusercontent.com/u/140225853?v=4" width="100px;" alt="Foto do Usuário 1 no GitHub"/><br>
+        <sub>
+          <b>Francinaldo Batista</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/marcoscastroj">
+        <img src="https://avatars.githubusercontent.com/u/102087019?v=4" width="100px;" alt="Foto do Usuário 2 no GitHub"/><br>
+        <sub>
+          <b>Marcos Castro</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/nathreginavt">
+        <img src="https://avatars.githubusercontent.com/u/110910030?v=4" width="100px;" alt="Foto do Usuário 3 no GitHub"/><br>
+        <sub>
+          <b>Nathália Teixeira</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/viitoriamoreirac">
+        <img src="https://avatars.githubusercontent.com/u/95057393?v=4" width="100px;" alt="Foto do Usuário 3 no GitHub"/><br>
+        <sub>
+          <b>Vitória Cabral</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+
 ### 🔧 Binários xK6 Utilizados
 
 Para estender as funcionalidades do K6, o projeto utiliza os seguintes binários customizados:
