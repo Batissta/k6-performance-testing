@@ -1,15 +1,15 @@
-import config from "../config/signUp/signUp.js";
-import { signUp } from "../simulation/signUp.js";
+import config from "../config/getUsers/getUsers.js";
+import { getUsers } from "../simulation/getUsers.js";
 
-export { signUp };
+export { getUsers };
 
 export const options = {
   scenarios: {
     signUpSmoke: {
-      ...config.scenarios.signUpSmoke,
+      ...config.scenarios.getUsersSmoke,
     },
   },
   thresholds: {
-    ...config.thresholds.smokeThresholds,
+    ...config.thresholds,
   },
 };
