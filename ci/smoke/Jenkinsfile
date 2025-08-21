@@ -7,7 +7,7 @@ pipeline {
                 script {
                     echo 'Executando testes de performance...'
                     dir('ci/load') {
-                        sh 'http://prometheus:9090/api/v1/write?test_id=${BUILD_ID} k6_custom run --env BASE_URI=http://host.docker.internal:3005 --out xk6-prometheus-rw ../../tests/smokeTests.js'
+                        sh 'K6_PROMETHEUS_RW_SERVER_URL=http://prometheus:9090/api/v1/write?test_id=${BUILD_ID} k6_custom run --env BASE_URI=http://host.docker.internal:3005 --out xk6-prometheus-rw ../../tests/smokeTests.js'
                     }
                 }
             }
