@@ -6,3 +6,7 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ["prometheus:9090"]
+  - job_name: "serverest"
+    metrics_path: "/status"
+    static_configs:
+      - targets: ["host.docker.internal:3005"]
