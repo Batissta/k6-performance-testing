@@ -17,6 +17,17 @@
 
 Este projeto demonstra uma arquitetura de testes de performance completa, utilizando **K6** para execução, **Prometheus** para coleta de métricas e **Grafana** para visualização, tudo orquestrado por uma pipeline **Jenkins** em um ambiente Docker.
 
+### 🕵🏽 Sumário
+
+- [🔧 Binários xK6 Utilizados](#-binários-xk6-utilizados)
+- [📦 Início Rápido com Docker](#-início-rápido-com-docker)
+- [⚙️ Configurando o Jenkins](#️-configurando-o-jenkins)
+- [🚦 Preparando o Ambiente de Teste](#-preparando-o-ambiente-de-teste)
+- [📊 Configurando o Dashboard no Grafana](#-configurando-o-dashboard-no-grafana)
+- [🚀 Executando e Verificando](#-executando-e-verificando)
+- [📁 Estrutura do Projeto](#-estrutura-do-projeto)
+- [⚡ Maneiras de executar os testes](#-maneiras-de-executar-os-testes)
+
 ### 🔧 Binários xK6 Utilizados
 
 Para estender as funcionalidades do K6, o projeto utiliza os seguintes binários customizados:
@@ -59,7 +70,7 @@ Acesse a interface do Jenkins em `http://localhost:8080`.
 
 ### 🚦 Preparando o Ambiente de Teste
 
-Para que os testes se conectem à sua aplicação, é necessário que sua API esteja em execução no endereço `http://localhost:3333`.
+Para que os testes se conectem à sua aplicação (sem alterar nada no código), é necessário que sua API esteja em execução no endereço `http://localhost:3333`.
 
 - A pipeline do Jenkins foi configurada para passar a variável de ambiente `--env BASE_URI=http://host.docker.internal:3333`, direcionando o tráfego do contêiner de testes para a sua máquina local.
 - Se sua API não estiver em execução localmente, altere a `BASE_URI` no arquivo de configuração do seu projeto para o endereço correto.
@@ -155,6 +166,25 @@ Acesse o Grafana em `http://localhost:3000` para visualizar as métricas.
         ├── smokeTests.js
         └── stressTests.js
 ```
+
+### ⚡ Maneiras de executar os testes
+
+1. Maneira básica, utilizada para debug na automação dos testes.
+   Com um terminal aberto na raiz do repositório (a api para testes deve estar configurada), execute:
+
+```bash
+k6 run tests/smokeTests.js
+```
+
+2. Segunda forma de execução para um debug mais detalhado e com uma maior visibilidade. Com um terminal aberto na raiz do repositório (a api para testes deve estar configurada), execute:
+
+```bash
+K6_CLOUD_TOKEN=<SEU_GRAFANA_TOKEN> k6 cloud run --local-execution tests/loadTests.js
+```
+
+3. A última forma prevista nessa documentação, serve para executar os testes de maneira mais profissional, com integração `CI/CD` com Jenkins e monitoramento, através de containers, com `Prometheus e Grafana`.
+
+Essa maneira foi documentada acima no [📦 Início Rápido com Docker.](#-início-rápido-com-docker)
 
 <br>
 <br>
