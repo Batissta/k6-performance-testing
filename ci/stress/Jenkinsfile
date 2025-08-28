@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Run Performance Test') {
+            steps {
+                script {
+                    echo 'Executando testes de performance...'
+                        sh 'K6_PROMETHEUS_RW_SERVER_URL=http://prometheus:9090/api/v1/write k6_custom run --tag testid=Stress_${BUILD_ID} --env BASE_URI=http://host.docker.internal:3333 --out xk6-prometheus-rw ./tests/stressTests.js'
+                }
+            }
+        }
+    }
+}
