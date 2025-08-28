@@ -1,4 +1,17 @@
 services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jenkins-k6-prometheus-grafana
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - k6-test-net
+
   prometheus:
     image: prom/prometheus:v2.48.0
     container_name: prometheus
@@ -6,9 +19,12 @@ services:
       - "9090:9090"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--enable-feature=remote-write-receiver"
+      - "--storage.tsdb.retention.time=15d"
+      - "--storage.tsdb.retention.size=2GB"
     networks:
       - k6-test-net
 
@@ -23,8 +39,9 @@ services:
       - k6-test-net
 
 networks:
-  k6-test-net:
-    external: true
+  k6-test-net: {}
 
 volumes:
   grafana-storage:
+  prometheus-data:
+  jenkins_home:
