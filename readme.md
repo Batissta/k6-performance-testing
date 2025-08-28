@@ -214,7 +214,7 @@ k6 run tests/smokeTests.js
 2. Segunda forma de execução para um debug mais detalhado e com uma maior visibilidade. Com um terminal aberto na raiz do repositório (a api para testes deve estar configurada), execute:
 
 ```bash
-K6_CLOUD_TOKEN=5b617e7ac5ed607d7b0d37709a0ae47facdcc5be8145089ef4be6357afd60030 k6 cloud run --local-execution tests/smokeTests.js
+K6_CLOUD_TOKEN=<SEU_TOKEN_GRAFANA> k6 cloud run --local-execution tests/smokeTests.js
 ```
 
 3. A última forma prevista nessa documentação, serve para executar os testes de maneira mais profissional, com integração `CI/CD` com Jenkins e monitoramento, através de containers, com `Prometheus e Grafana`.
