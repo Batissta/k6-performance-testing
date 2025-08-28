@@ -81,15 +81,7 @@ Para estender as funcionalidades do K6, o projeto utiliza os seguintes binários
 
 Siga estes passos para configurar e executar o ambiente de testes.
 
-1.  **Construa a imagem customizada do Jenkins:**
-    ```bash
-    docker build -t jenkins-golang-xk6-prometa .
-    ```
-2.  **Execute o contêiner Jenkins:**
-    ```bash
-    docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home --name jenkins-master jenkins-golang-xk6-prometa
-    ```
-3.  **Inicie a stack de monitoramento (Prometheus + Grafana):**
+1.  **Construa a imagem customizada do Jenkins e inicie a stack de monitoramento (Prometheus + Grafana):**
     ```bash
     docker compose up -d
     ```
@@ -125,6 +117,7 @@ Acesse o Grafana em `http://localhost:3000` para visualizar as métricas.
 
     - Clique em **"Connections"** e depois em **"Add new data source"**.
     - Procure e selecione **`Prometheus`**.
+    - No campo **nome**, coloque **`Prometheus`**.
     - No campo **URL**, adicione: `http://prometheus:9090`
     - Salve e teste a conexão.
 
@@ -133,6 +126,8 @@ Acesse o Grafana em `http://localhost:3000` para visualizar as métricas.
     - Busque por templates no [site oficial do Grafana](https://grafana.com/grafana/dashboards/) (preferencialmente modelos para Prometheus + K6).
     - Copie o ID do dashboard escolhido.
     - No menu lateral do Grafana, navegue para **"Dashboards"** e clique em **"Import"**.
+
+    _Como alternativa, deixei um dashboard configurado para copiar e colar no caminho:_ `util/grafana-dashboard.json`.
 
     <img src="assets/asset02.png" alt="Demonstração de onde deves procurar o dashboard" width="50%">
 
@@ -149,7 +144,7 @@ Acesse o Grafana em `http://localhost:3000` para visualizar as métricas.
 
 ### 🚀 Executando e Verificando
 
-1.  **Execute a Pipeline**: No Jenkins, vá para a pipeline `k6-smoke` e clique em **"Build Now"**.
+1.  **Execute a Pipeline**: No Jenkins, vá para a pipeline `k6-smoke` e clique em **"Build Now"**.<br>
     <img src="assets/asset01.png" alt="Demonstração de onde se encontra o botão de buildar a pipeline." width="50%">
 
 2.  **Verifique os Dados**: Após a execução, os dados começarão a aparecer no seu dashboard do Grafana em `http://localhost:3000`.
@@ -219,7 +214,7 @@ k6 run tests/smokeTests.js
 2. Segunda forma de execução para um debug mais detalhado e com uma maior visibilidade. Com um terminal aberto na raiz do repositório (a api para testes deve estar configurada), execute:
 
 ```bash
-K6_CLOUD_TOKEN=<SEU_GRAFANA_TOKEN> k6 cloud run --local-execution tests/loadTests.js
+K6_CLOUD_TOKEN=5b617e7ac5ed607d7b0d37709a0ae47facdcc5be8145089ef4be6357afd60030 k6 cloud run --local-execution tests/smokeTests.js
 ```
 
 3. A última forma prevista nessa documentação, serve para executar os testes de maneira mais profissional, com integração `CI/CD` com Jenkins e monitoramento, através de containers, com `Prometheus e Grafana`.
