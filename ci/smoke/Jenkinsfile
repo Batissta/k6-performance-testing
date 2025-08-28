@@ -1,13 +1,28 @@
 pipeline {
     agent any
-
     stages {
         stage('Run Performance Test') {
             steps {
                 script {
                     echo 'Executando testes de performance...'
-                        sh 'K6_PROMETHEUS_RW_SERVER_URL=http://prometheus:9090/api/v1/write k6_custom run --tag testid=Smoke_${BUILD_ID} --env BASE_URI=http://host.docker.internal:3333 --out xk6-prometheus-rw ./tests/smokeTests.js'
+                    def testStartTimestamp = System.currentTimeMillis()
+                    sh """
+                    # Envia métrica de início do teste
+                    curl -X POST -H 'Content-Type: text/plain' --data-binary 'k6_test_start_timestamp{testid="Smoke_${BUILD_ID}"} ${testStartTimestamp}' http://prometheus:9090/api/v1/write
+                    """
+                    sh 'K6_PROMETHEUS_RW_SERVER_URL=http://prometheus:9090/api/v1/write k6_custom run --tag testid=Smoke_${BUILD_ID} --env BASE_URI=http://host.docker.internal:3333 --out xk6-prometheus-rw ./tests/smokeTests.js'
                 }
+            }
+        }
+    }
+    post {
+        always {
+            script {
+                def testEndTimestamp = System.currentTimeMillis()
+                sh """
+                # Envia métrica de fim do teste
+                curl -X POST -H 'Content-Type: text/plain' --data-binary 'k6_test_end_timestamp{testid="Smoke_${BUILD_ID}"} ${testEndTimestamp}' http://prometheus:9090/api/v1/write
+                """
             }
         }
     }
